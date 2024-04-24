@@ -19,6 +19,7 @@ exports.getchat = catchAsync(async (req, res, next) => {
       : { _id: doc._id, user: doc.user2 };
   res.status(200).json({ status: 'success', doc: data });
 });
+//mas
 exports.getAllMychats = catchAsync(async (req, res, next) => {
   const doc = await Chat.find({
     $or: [{ user1: req.user._id }, { user2: req.user._id }],
