@@ -30,12 +30,14 @@ router.get(
 router.patch(
   '/updateMeAndUpload',
   authMiddlewers.protect,
+  authMiddlewers.isactive,
   imguserMiddlewers.uploadUserPhoto,
   userController.updateMe
 );
 router.patch(
   '/updateMe',
   authMiddlewers.protect,
+  authMiddlewers.isactive,
   userController.updateMe
 );
 router.delete('/deleteMe', authMiddlewers.protect, userController.deleteMe);
@@ -64,8 +66,8 @@ router
   )
   .patch(
     authMiddlewers.protect,
-    authMiddlewers.isactive,
     authMiddlewers.restrictTo('admin'),
+    authMiddlewers.isactive,
     userController.updateUser
   )
   .delete(
