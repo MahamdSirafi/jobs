@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
 const authMiddlewers = require('./../middlewares/authMiddlewers');
-const imguserMiddlewers = require('./../middlewares/imguserMiddlewers');
+const { uploadUserPhoto } = require('./../middlewares/imgUsertMiddlewar');
 const router = express.Router();
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
@@ -32,7 +32,7 @@ router.patch(
   '/updateMeAndUpload',
   authMiddlewers.protect,
   authMiddlewers.isactive,
-  imguserMiddlewers.uploadUserPhoto,
+  uploadUserPhoto,
   userController.updateMe
 );
 router.patch(
