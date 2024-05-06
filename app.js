@@ -72,6 +72,7 @@ app.use(
 //ضغط البيانات قبل ارسالها من اجل تسريع النقل
 app.use(compression());
 const userRouter = require('./routes/userRoutes');
+const categurieRouter= require('./routes/categurieRouter')
 
 const companyRouter= require('./routes/companyRouter')
 
@@ -79,6 +80,7 @@ const chatRouter= require('./routes/chatRouter')
 
 // 3) ROUTES
 app.use('/', userRouter);
+app.use('/api/v1.0.0/categuries', categurieRouter);
 
 app.use('/api/v1.0.0/companys', companyRouter);
 app.use('/api/v1.0.0/chats', chatRouter);

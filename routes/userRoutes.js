@@ -66,8 +66,8 @@ router
   )
   .patch(
     authMiddlewers.protect,
-    authMiddlewers.isactive,
     authMiddlewers.restrictTo('admin'),
+    authMiddlewers.isactive,
     userController.updateUser
   )
   .delete(
