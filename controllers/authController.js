@@ -27,15 +27,11 @@ createSendToken = (user, statusCode, req, res) => {
   });
 };
 exports.signup = catchAsync(async (req, res, next) => {
-  if(!req.body.role=='user'&&!req.body.role=='mgr'){
-    return next(new AppError('the role must a user or manager'))
-  }
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    phone: req.body.phone,
-    role: req.body.role,
+    role: 'user',
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
   // await new Email(newUser, url).sendWelcome();

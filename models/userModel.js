@@ -15,20 +15,13 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
-  //   phone: {
-  //   type: String,
-  //   required: [true, 'Please provide your phone'],
-  //   unique: true,
-    
-    
-  // },
   photo: {
     type: String,
     default: 'default.jpg',
   },
   role: {
     type: String,
-    enum: [ 'mgr', 'user', 'admin'],
+    enum: ['mgr', 'user', 'admin'],
     default: 'user',
   },
   password: {
@@ -43,6 +36,10 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 userSchema.pre('save', async function (next) {

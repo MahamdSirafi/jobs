@@ -10,22 +10,34 @@ router
   .route('/')
   .get(
     authMiddlewers.protect,
+    authMiddlewers.isactive,
     dynamicMiddleware.addQuery('chat', 'chatId'),
     messageController.getAllmessage
   )
   .post(
     authMiddlewers.protect,
+    authMiddlewers.isactive,
     dynamicMiddleware.addVarBody('sender', 'userId'),
     dynamicMiddleware.addVarBody('chat', 'chatId'),
     messageController.createmessage
   );
 router
   .route('/:id')
-  .get(authMiddlewers.protect, messageController.getmessage)
+  .get(
+    authMiddlewers.protect,
+    authMiddlewers.isactive,
+    messageController.getmessage
+  )
   .patch(
     authMiddlewers.protect,
+    authMiddlewers.isactive,
     checkMiddleware.checkOwner(Message, 'sender', 'id'),
     messageController.updatemessage
   )
-  .delete(authMiddlewers.protect, checkMiddleware.checkOwner(Message, 'sender', 'id'),messageController.deletemessage);
+  .delete(
+    authMiddlewers.protect,
+    authMiddlewers.isactive,
+    checkMiddleware.checkOwner(Message, 'sender', 'id'),
+    messageController.deletemessage
+  );
 module.exports = router;

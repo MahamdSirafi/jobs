@@ -13,11 +13,12 @@ router.get('/resetPassword/:token', (req, res) => {
 });
 router.post('/signup', authController.signup);
 // router.use(authMiddlewers.protect);
-router.patch('/activeMe', authMiddlewers.protect, userController.activeMe);
+// router.patch('/activeMe', authMiddlewers.protect, userController.activeMe);
 // router.use(authMiddlewers.isactive)
 router.patch(
   '/updateMyPassword',
   authMiddlewers.protect,
+  authMiddlewers.isactive,
   authController.updatePassword
 );
 router.get(
@@ -30,12 +31,14 @@ router.get(
 router.patch(
   '/updateMeAndUpload',
   authMiddlewers.protect,
+  authMiddlewers.isactive,
   imguserMiddlewers.uploadUserPhoto,
   userController.updateMe
 );
 router.patch(
   '/updateMe',
   authMiddlewers.protect,
+  authMiddlewers.isactive,
   userController.updateMe
 );
 router.delete('/deleteMe', authMiddlewers.protect, userController.deleteMe);
@@ -45,7 +48,6 @@ router
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
-    // authMiddlewers.restrictTo('admin'),
     userController.getAllUsers
   )
   .post(
