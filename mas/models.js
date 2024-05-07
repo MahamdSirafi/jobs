@@ -48,6 +48,7 @@ unique or u`);
 >ObjectId or o
 >Date or d
 >Number or n
+>Boolean or b
 ==> `);
       switch (true) {
         case /(String|s)/i.test(type): {
@@ -72,12 +73,20 @@ unique or u`);
             : `type : Number,`;
           break;
         }
+        case /(Boolean|b)/i.test(type): {
+          codeproperties += codeproperties
+            ? `\ntype : Boolean,`
+            : `type : Boolean,`;
+          break;
+        }
         case /(ObjectId|o)/i.test(type): {
           codeproperties += codeproperties
             ? `\ntype : mongoose.Schema.ObjectId,`
             : `type : mongoose.Schema.ObjectId,`;
           ref = readlineSync.question(`what is ref this field : `);
-          codeproperties += codeproperties ? `\nref : ${ref}` : `ref : ${ref},`;
+          codeproperties += codeproperties
+            ? `\nref : '${ref}'`
+            : `ref : '${ref}',`;
           break;
         }
       }
@@ -93,7 +102,7 @@ unique or u`);
   codeModel += `${allfield}
 },{
       timestamps: true,
-      versionKey: false 
+      versionKey: false
     });
     const ${
       createName[0].toUpperCase() + createName.slice(1)

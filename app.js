@@ -72,11 +72,15 @@ app.use(
 //ضغط البيانات قبل ارسالها من اجل تسريع النقل
 app.use(compression());
 const userRouter = require('./routes/userRoutes');
+const applyRouter= require('./routes/applyRouter')
+const offerRouter= require('./routes/offerRouter')
 const categurieRouter = require('./routes/categurieRouter');
 const chatRouter = require('./routes/chatRouter');
 
 // 3) ROUTES
 app.use('/', userRouter);
+app.use('/api/v1.0.0/applys', applyRouter);
+app.use('/api/v1.0.0/offers', offerRouter);
 app.use('/api/v1.0.0/categuries', categurieRouter);
 app.use('/api/v1.0.0/chats', chatRouter);
 app.use('/api/v1.0.0/users', userRouter);
