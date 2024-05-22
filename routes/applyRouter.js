@@ -4,7 +4,6 @@ const { uploadCvPhoto } = require('../middlewares/imgApplytMiddlewar');
 const dynamicMiddleware = require('../middlewares/dynamicMiddleware');
 const express = require('express');
 const router = express.Router();
-router.use(authMiddlewers.protect);
 router
   .route('/')
   .get(protect, restrictTo('mgr'), applyController.getAllapply)
