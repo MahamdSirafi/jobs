@@ -28,8 +28,9 @@ const applySchema = new mongoose.Schema(
       type: String,
     },
     status: {
-      required: [true, 'must enter cv'],
-      type: String,
+      enum: ['waiting', 'accept', 'refuse'],
+      default: 'waiting',
+      type: String
     },
   },
   {

@@ -23,6 +23,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       )
     );
   }
+  console.log(req.files);
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   // const filteredBody = filterObj(req.body, 'name', 'email', 'photo');
   if (req.files) {
@@ -32,6 +33,10 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     req.body.photo = `${req.protocol}://${req.get('host')}/img/users/${
       req.files.photo[0].filename
     }`;
+  }else{
+    req.body.photo = `${req.protocol}://${req.get(
+      "host"
+    )}/img/users/${req.file.filename}`;
   }
   // 3) Update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, req.body, {

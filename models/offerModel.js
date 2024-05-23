@@ -25,7 +25,7 @@ const offerSchema = new mongoose.Schema(
           type: Number,
           required: [true, 'enter the high price'],
         },
-        type: {
+        typeprice: {
           type: String,
           required: [true, ''],
         },
@@ -46,7 +46,7 @@ const offerSchema = new mongoose.Schema(
           type: Number,
           required: [true, 'enter the high price'],
         },
-        type: {
+       time: {
           type: String,
           required: [true, ''],
           enum: ['year', 'month'],
@@ -55,6 +55,10 @@ const offerSchema = new mongoose.Schema(
     },
     note: {
       required: [true, 'must enter experience'],
+      type: String,
+    },
+    description: {
+      required: [true, 'must enter description'],
       type: String,
     },
     jobStatus: {

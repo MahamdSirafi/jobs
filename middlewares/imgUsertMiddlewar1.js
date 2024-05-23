@@ -1,4 +1,3 @@
-
 const multer = require('multer');
 const AppError = require('../utils/appError');
 const multerStorage = multer.diskStorage({
@@ -8,12 +7,7 @@ const multerStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     const ext = file.mimetype.split('/')[1];
     cb(
-      null,
-      `${
-        file.fieldname == 'photo'
-          ? `user-${req.user.id}-${Date.now()}.${ext}`
-          : `company-${req.user.id}-${Date.now()}.${ext}`
-      }`
+      null,`user-${req.user.id}-${Date.now()}.${ext}` 
     );
   },
 });
@@ -28,7 +22,5 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
 });
-exports.uploadUserPhoto = upload.fields([
-  { name: 'photo', maxCount: 1 },
-  { name: 'image', maxCount: 1 },
-]);
+exports.uploadUserPhoto = upload.single('photo')
+ 
